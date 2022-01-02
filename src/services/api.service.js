@@ -1,5 +1,5 @@
 const readAll = async function (query, Model) {
-   const defaultPage = 1
+   const defaultPage = 0
    const defaultSize = 20
 
    const minPage = 0
@@ -8,7 +8,6 @@ const readAll = async function (query, Model) {
 
    const page = Number.parseInt(query._page) || defaultPage
    const size = Number.parseInt(query._size) || defaultSize
-
 
    const limit = (size > minSize && size <= maxSize) ? size : defaultSize
    const offset = ((page - 1) > minPage) ? Number.parseInt((page - 1) * size) : defaultPage
