@@ -15,15 +15,15 @@ const readAll = async function (query, Model) {
    try {
       const users = await Model.findAndCountAll({ limit, offset })
 
-      const pageInfo = {
+      const meta = {
          count: users.count,
          limit: size,
          totalPage: Math.ceil(users.count / limit),
+         previous: page > 1 ? (page - 1) : null,
          current: page || 1,
          nextPage: (page || 1) + 1,
-         previous: page > 1 ? page : null
       }
-      return Promise.resolve({ pageInfo, data: users.rows })
+      return Promise.resolve({ meta, data: users.rows })
    } catch (error) {
       return Promise.reject(error)
    }

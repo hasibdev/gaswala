@@ -8,7 +8,7 @@ const apiService = require('../services/api.service')
 const readAll = async function (req, res) {
    try {
       const data = await apiService.readAll(req.query, Product)
-      return res.json({ data })
+      return res.json(data)
    } catch (error) {
       return res.status(500).json({ message: 'Something went wrong!', error })
    }
