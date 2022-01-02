@@ -1,0 +1,36 @@
+version: '3'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: db
+    networks:
+      - app-tier
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_DATABASE: 'database_development'
+    expose:
+      - '3306'
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./db:/api/mysql/data
+
+  api:
+    depends_on:
+      - db
+    networks:
+      - app-tier
+    container_name: api
+    restart: always
+    build: .
+
+    expose:
+      - '8000'
+    ports:
+      - '8000:8000'
