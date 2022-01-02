@@ -5,6 +5,8 @@ const { sendMail } = require('../services/mail.service')
 const { body, validationResult } = require('express-validator')
 const { User } = require('../models')
 
+const apiService = require('../services/api.service')
+
 /**
  * User Login
  */
@@ -33,32 +35,13 @@ const login = async function (req, res) {
  * Read All Data
  */
 const readAll = async function (req, res) {
-
-   const page = Number.parseInt(req.query._page)
-   const size = Number.parseInt(req.query._size)
-   const defaultPage = 0
-   const defaultSize = 25
-
-   const minPage = 0
-   const minSize = 0
-   const maxSize = 200
-
-   const limit = (size && size > minSize && size <= maxSize) ? size : defaultSize
-   const offset = (page && page > minPage) ? Number.parseInt(page * size) : defaultPage
-
    try {
-      const users = await User.findAndCountAll({ limit, offset })
-
-      const pageInfo = {
-         total: Math.round(users.count / size),
-         current: page,
-         nextPage: page + 1,
-         previous: page - 1
-      }
-      return res.json({ data: users.rows, pageInfo })
+      const data = await apiService.readAll(req.query, User)
+      return res.json(data)
    } catch (error) {
-      return res.status(500).json({ message: 'Something went wrong!', error })
+      return res.status(500).json({ message: "Something went worng!" })
    }
+
 }
 
 /**
