@@ -7,7 +7,7 @@ const apiService = require('../services/api.service')
  */
 const readAll = async function (req, res) {
    try {
-      const data = await apiService.readAll(req.query, Product)
+      const data = await apiService.paginated(req.query, Product)
       return res.json(data)
    } catch (error) {
       return res.status(500).json({ message: 'Something went wrong!', error })
@@ -58,11 +58,11 @@ const update = async function (req, res) {
    }
 
    const { id } = req.params
-   const { } = req.body
+   const { name, price, unit } = req.body
 
    try {
       await Product.update(
-         {},
+         { name, price, unit },
          { where: { id } }
       )
 

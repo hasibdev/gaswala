@@ -1,4 +1,4 @@
-const readAll = async function (query, Model) {
+const paginated = async function (query, Model) {
    const defaultPage = 0
    const defaultSize = 20
 
@@ -32,5 +32,5 @@ const readAll = async function (query, Model) {
 
 
 module.exports = {
-   readAll
+   paginated
 }
