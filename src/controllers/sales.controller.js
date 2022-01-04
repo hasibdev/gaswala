@@ -7,7 +7,7 @@ const apiService = require('../services/api.service')
  */
 const readAll = async function (req, res) {
    try {
-      const data = await apiService.paginated(req.query, Sale, { include: [User] })
+      const data = await apiService.paginated(req.query, Sale, { include: { model: User, as: 'user' } })
       return res.json(data)
    } catch (error) {
       return res.status(500).json({ error })

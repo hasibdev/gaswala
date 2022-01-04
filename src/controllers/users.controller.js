@@ -36,7 +36,7 @@ const login = async function (req, res) {
  */
 const readAll = async function (req, res) {
    try {
-      const data = await apiService.paginated(req.query, User, { include: [Sale] })
+      const data = await apiService.paginated(req.query, User, { include: [{ model: Sale, as: 'sales' }] })
       return res.json(data)
    } catch (error) {
       return res.status(500).json({ message: "Something went worng!" })

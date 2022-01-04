@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
        */
       static associate({ Sale }) {
          // define association here
-         this.hasMany(Sale, { foreignKey: 'userId' })
+         this.hasMany(Sale, { foreignKey: 'userId', as: 'sales' })
       }
 
       toJSON() {
