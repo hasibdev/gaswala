@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 
 const { sendMail } = require('../services/mail.service')
 const { body, validationResult } = require('express-validator')
-const { User } = require('../models')
+const { User, Sale } = require('../models')
 
 const apiService = require('../services/api.service')
 
@@ -36,7 +36,7 @@ const login = async function (req, res) {
  */
 const readAll = async function (req, res) {
    try {
-      const data = await apiService.paginated(req.query, User)
+      const data = await apiService.paginated(req.query, User, { include: [Sale] })
       return res.json(data)
    } catch (error) {
       return res.status(500).json({ message: "Something went worng!" })

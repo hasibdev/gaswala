@@ -1,6 +1,6 @@
 const { Sale } = require('../models')
 
-const paginated = async function (query, Model) {
+const paginated = async function (query, Model, options = {}) {
    const defaultPage = 0
    const defaultSize = 20
 
@@ -15,7 +15,7 @@ const paginated = async function (query, Model) {
    const offset = ((page - 1) > minPage) ? Number.parseInt((page - 1) * size) : defaultPage
 
    try {
-      const data = await Model.findAndCountAll({ limit, offset })
+      const data = await Model.findAndCountAll({ limit, offset, ...options })
 
       const meta = {
          count: data.count,
