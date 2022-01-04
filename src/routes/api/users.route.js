@@ -16,7 +16,7 @@ router.get('/verify/:token', usersController.verify)
 router.post('/forget-password', usersController.forgetPassword)
 router.get('/me', auth('users'), usersController.readMe)
 
-router.get('/', auth('admins'), usersController.readAll)
+router.get('/', usersController.readAll)
 router.post('/', usersController.validate('create'), usersController.create)
 
 
