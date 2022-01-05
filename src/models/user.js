@@ -47,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.STRING,
          defaultValue: 'users',
       },
+      // Virtual Field
       name: {
          type: DataTypes.VIRTUAL,
          get() {
