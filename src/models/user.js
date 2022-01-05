@@ -46,6 +46,12 @@ module.exports = (sequelize, DataTypes) => {
       guard: {
          type: DataTypes.STRING,
          defaultValue: 'users',
+      },
+      name: {
+         type: DataTypes.VIRTUAL,
+         get() {
+            return this.firstName + ' ' + this.lastName
+         }
       }
    }, {
       sequelize,
