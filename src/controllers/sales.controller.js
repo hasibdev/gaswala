@@ -22,7 +22,7 @@ const readOne = async function (req, res) {
    try {
       const data = await Sale.findOne({
          where: { id },
-         include: [{ model: User }]
+         include: 'user'
       })
       if (!data) return res.status(404).json({ message: `No data found for the id: ${id}` })
 

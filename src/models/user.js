@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
          this.hasMany(Sale, { foreignKey: 'userId', as: 'sales' })
       }
 
-      toJSON() {
-         return {
-            ...this.get(),
-            password: undefined
-         }
-      }
+      // toJSON() {
+      //    return {
+      //       ...this.get(),
+      //       password: undefined
+      //    }
+      // }
    };
    User.init({
       firstName: {
@@ -51,6 +51,9 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       tableName: 'users',
       modelName: 'User',
+      defaultScope: {
+         attributes: { exclude: ['password'] },
+      }
    })
    return User
 }
